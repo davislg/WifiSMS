@@ -21,6 +21,7 @@
 - (NSString *)QueryTotals:(NSString *)CC;
 - (NSString *)checkQueue;
 - (NSString *)clearQueue;
+- (UIImage *)resizedImage:(UIImage *)inImage atSize:(CGRect)thumbRect;
 
 - (NSString *)getAllContacts:(NSString *)CC;
 - (NSString *)LoadFullAddressBook:(NSString *)CC;

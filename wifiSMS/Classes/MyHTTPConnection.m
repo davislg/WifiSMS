@@ -288,7 +288,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
                 conversationList = [CKConversationList sharedConversationList];
                 CKSMSEntity *ckEntity = [smsService copyEntityForAddressString:Phone];
                 CKConversation *conversation = [conversationList conversationForRecipients:[NSArray arrayWithObject:ckEntity] create:TRUE service:smsService];
-                NSString *groupID = [conversation groupID];           
+                //NSString *groupID = [conversation groupID];           
                 CKSMSMessage *ckMsg = [smsService _newSMSMessageWithText:msg forConversation:conversation];
                 [smsService sendMessage:ckMsg];
                 [ckMsg release];     
@@ -979,8 +979,9 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 					UIImage* image = [UIImage imageWithData:imageData];
 					[imageData release];
 					CGRect sz = CGRectMake(0.0f, 0.0f, 96.0f, 96.0f);
-					UIImage *smallImage = resizedImage(image, sz);
-					NSData *imageDataNew = [NSData dataWithData:UIImageJPEGRepresentation(smallImage, 1)];
+					//UIImage *smallImage = resizedImage(image, sz);
+                    UIImage* smallImage = [self resizedImage:image atSize:sz];
+					NSData* imageDataNew = [NSData dataWithData:UIImageJPEGRepresentation(smallImage, 1)];
 					NSString *fName = [phoneNoFormat stringByAppendingString:@".jpg"];
                     
                     
@@ -1157,8 +1158,8 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 	return [outdata autorelease];
 }
 
-
-resizedImage (UIImage *inImage, CGRect thumbRect) {
+//resizedImage (UIImage *inImage, CGRect thumbRect) {
+- (UIImage *)resizedImage:(UIImage *)inImage atSize:(CGRect)thumbRect {
 	CGImageRef			imageRef = [inImage CGImage];
 	CGImageAlphaInfo	alphaInfo = CGImageGetAlphaInfo(imageRef);
 	

@@ -11,7 +11,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		5F45C1301448E48A00BD3374 /* ChatKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F45C12F1448E48A00BD3374 /* ChatKit.framework */; };
 		5F92E7A513C103CB00B6D9C9 /* MyHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A113C103CB00B6D9C9 /* MyHTTPConnection.m */; };
 		5F92E7B913C103F900B6D9C9 /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A813C103F900B6D9C9 /* HTTPConnection.m */; };
 		5F92E7BA13C103F900B6D9C9 /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F92E7A913C103F900B6D9C9 /* HTTPAuthenticationRequest.m */; };
@@ -29,8 +28,10 @@
 		5F92EF2213C10F4700B6D9C9 /* SMS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F92EF2113C10F4700B6D9C9 /* SMS.plist */; };
 		5FACA0D713C52B21002CDC76 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FACA0D613C52B21002CDC76 /* AddressBook.framework */; };
 		5FB537FD13DB698F00653272 /* WebServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FB537FC13DB698F00653272 /* WebServer.plist */; };
+		8B4C7CB01525A18700E4F76A /* ChatKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F45C12F1448E48A00BD3374 /* ChatKit.framework */; };
+		8B4C7CB11525A19800E4F76A /* AppSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B4C7CAD15259F5600E4F76A /* AppSupport.framework */; };
+		8B6FB6E71525966D0030668F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B6FB6E61525966D0030668F /* CoreTelephony.framework */; };
 		D2940F880FEE032400920DF0 /* wifiSMSDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2940F870FEE032400920DF0 /* wifiSMSDelegate.m */; };
-		D2940F990FEE034100920DF0 /* AppSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2940F980FEE034100920DF0 /* AppSupport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,8 @@
 		5F92F00C13C1235500B6D9C9 /* MyHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHTTPConnection.h; sourceTree = "<group>"; };
 		5FACA0D613C52B21002CDC76 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		5FB537FC13DB698F00653272 /* WebServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WebServer.plist; sourceTree = "<group>"; };
+		8B4C7CAD15259F5600E4F76A /* AppSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppSupport.framework; path = PrivateFrameworks/AppSupport.framework; sourceTree = "<group>"; };
+		8B6FB6E61525966D0030668F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		D2940F860FEE032400920DF0 /* wifiSMSDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wifiSMSDelegate.h; sourceTree = "<group>"; };
 		D2940F870FEE032400920DF0 /* wifiSMSDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wifiSMSDelegate.m; sourceTree = "<group>"; };
 		D2940F980FEE034100920DF0 /* AppSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppSupport.framework; path = System/Library/PrivateFrameworks/AppSupport.framework; sourceTree = SDKROOT; };
@@ -78,14 +81,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B4C7CB11525A19800E4F76A /* AppSupport.framework in Frameworks */,
+				8B4C7CB01525A18700E4F76A /* ChatKit.framework in Frameworks */,
+				8B6FB6E71525966D0030668F /* CoreTelephony.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
-				D2940F990FEE034100920DF0 /* AppSupport.framework in Frameworks */,
 				5F92E86313C1063500B6D9C9 /* libsqlite3.0.dylib in Frameworks */,
 				5F92E8AC13C1078C00B6D9C9 /* CFNetwork.framework in Frameworks */,
 				5FACA0D713C52B21002CDC76 /* AddressBook.framework in Frameworks */,
-				5F45C1301448E48A00BD3374 /* ChatKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +118,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				8B4C7CAD15259F5600E4F76A /* AppSupport.framework */,
+				8B6FB6E61525966D0030668F /* CoreTelephony.framework */,
 				5FB936C913ED9439005CDE48 /* cocoaHTTPServer */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -271,9 +277,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
-					"\"$(SRCROOT)\"",
+					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/PrivateFrameworks,
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/PrivateFrameworks",
 					"\"$(SRCROOT)/PrivateFrameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -281,14 +288,22 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WifiSMS_Prefix.pch;
 				INFOPLIST_FILE = "WifiSMS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/CoreTelephony.framework\"",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks\"",
 					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/AddressBook.framework\"",
 					"\"$(SRCROOT)\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
+					"-v",
+				);
 				PRODUCT_NAME = WifiSMS;
-				USER_HEADER_SEARCH_PATHS = "/davis/code/dvs/WifiSMS/wifiSMS/PrivateFrameworks/**";
+				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/Developer/Library/Frameworks $(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Debug;
 		};
@@ -298,22 +313,31 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
-					"\"$(SRCROOT)\"",
+					/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/PrivateFrameworks,
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/PrivateFrameworks",
 					"\"$(SRCROOT)/PrivateFrameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WifiSMS_Prefix.pch;
 				INFOPLIST_FILE = "WifiSMS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/CoreTelephony.framework\"",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks\"",
 					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/AddressBook.framework\"",
 					"\"$(SRCROOT)\"",
 				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-weak_library",
+					/usr/lib/libSystem.B.dylib,
+					"-v",
+				);
 				PRODUCT_NAME = WifiSMS;
-				USER_HEADER_SEARCH_PATHS = "/davis/code/dvs/WifiSMS/wifiSMS/PrivateFrameworks/**";
+				USER_HEADER_SEARCH_PATHS = "$(SDKROOT)/Developer/Library/Frameworks $(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Release;
 		};
@@ -330,6 +354,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/davis/code/dvs/WifiSMS/wifiSMS/PrivateFrameworks/**";
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Debug;
 		};
@@ -351,6 +376,7 @@
 				);
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "/davis/code/dvs/WifiSMS/wifiSMS/PrivateFrameworks/**";
+				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Release;
 		};
