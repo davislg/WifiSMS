@@ -23,7 +23,7 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 	NSLog(@"Notification: %@", name);
 	
 
-/*
+
 	 if ([@"kCTMessageReceivedNotification" isEqualToString:IncomingNotification] || [@"kCTMessageSentNotification" isEqualToString:IncomingNotification]) {
 	 
 	 NSLog(@"Message Got Notification");
@@ -317,7 +317,8 @@ static void callback(CFNotificationCenterRef center, void *observer, CFStringRef
 
     
 	NSFileManager *fileManager= [NSFileManager defaultManager]; 
-	if(![fileManager fileExistsAtPath:tmpDir isDirectory: YES])
+    BOOL isDir;
+	if (![fileManager fileExistsAtPath:tmpDir isDirectory: &isDir])
 		if(![fileManager createDirectoryAtPath:tmpDir withIntermediateDirectories:YES attributes:nil error:NULL])
 			NSLog(@"Error: Create tmp folder failed /private/var/tmp/WifiSMS/");
 	

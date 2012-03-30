@@ -16,7 +16,10 @@
 			return nil;
 		}
 		
-		NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:filePath traverseLink:NO];
+        // DEPRECATED METHOD
+		//NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:filePath traverseLink:NO];
+        NSError *error = nil;
+        NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:&error];
 		NSNumber *fileSize = [fileAttributes objectForKey:NSFileSize];
 		fileLength = (UInt64)[fileSize unsignedLongLongValue];
 	}

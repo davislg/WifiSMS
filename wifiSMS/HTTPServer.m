@@ -229,7 +229,7 @@
 			// Create the NSNetService with our basic parameters
 			netService = [[NSNetService alloc] initWithDomain:domain type:type name:name port:port];
 			
-			[netService setDelegate:self];
+			[netService setDelegate:(id)self];
 			[netService publish];
 			
 			// Do not set the txtRecordDictionary prior to publishing!!!
