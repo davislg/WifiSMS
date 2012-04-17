@@ -284,6 +284,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
             {
                 //CKMadridService *madridService = [CKMadridService sharedMadridService];
                 //NSString *foo = [madridService _temporaryFileURLforGUID:@"A5F70DCD-F145-4D02-B308-B7EA6C248BB2"];
+                
                 NSLog(@"Sending SMS");
                 conversationList = [CKConversationList sharedConversationList];
                 CKSMSEntity *ckEntity = [smsService copyEntityForAddressString:Phone];
@@ -449,8 +450,13 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 				}
 				return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
 				
-			} else {
-				//return fake index.html		
+			} else if ([path hasSuffix:@".html"]) {
+				//return other .html		
+				NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
+				webPath = [NSString stringWithFormat:@"%@/%@", webPath, path];
+				return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
+            } else {
+				//return english index.html		
 				NSString *webPath = [myAppPath stringByAppendingString:@"/Web/index.html"];
 				return [[[HTTPFileResponse alloc] initWithFilePath:webPath] autorelease];
 				
@@ -612,7 +618,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
         
         const char *sql4 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id, message.rowid, 0 as isMadrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ? ORDER BY message.rowid desc limit 100) Order by DT ASC"; 
         
-        const char *sql5 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id,  message.rowid, message.is_madrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ?001  UNION SELECT text, case when madrid_flags = 12289  then 2 else 3 end as flags, date, madrid_handle, ?002 as group_id, NULL as a, CASE WHEN madrid_AttachmentInfo is null then '' else 'madridattachment' end as b, madrid_attachmentInfo as c, NULL as d, rowid, message.is_madrid FROM message where madrid_handle LIKE ?003 ORDER BY message.rowid desc limit 100) Order by rowid ASC";
+        const char *sql5 = "SELECT * FROM ( select message.text, message.flags, message.date as DT, message.address, message.group_ID, msg_pieces.content_type, msg_pieces.content_loc, msg_pieces.data, msg_pieces.message_id,  message.rowid, message.is_madrid from message left join msg_pieces ON message.rowid=msg_pieces.message_id WHERE ((text is null AND content_type is not null AND content_loc is not null) OR (text is not null)) AND group_id = ?001  UNION SELECT text, case when madrid_flags = 12289 OR madrid_flags = 4097 then 2 else 3 end as flags, date, madrid_handle, ?002 as group_id, NULL as a, CASE WHEN madrid_AttachmentInfo is null then '' else 'madridattachment' end as b, madrid_attachmentInfo as c, NULL as d, rowid, message.is_madrid FROM message where madrid_handle LIKE ?003 ORDER BY message.rowid desc limit 100) Order by rowid ASC";
         
 
         NSString *value =[[UIDevice currentDevice] systemVersion];         
@@ -696,7 +702,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
                             
                             if ([blobstring rangeOfString:[[file stringByDeletingLastPathComponent] lastPathComponent]].location != NSNotFound) {
                                 //NSLog(@"found");
-                                if ([flags isEqualToString:@"3"]) { //from me
+                                if ([flags isEqualToString:@"2"]) { //to me
                                     if ( [[file stringByDeletingPathExtension] hasSuffix:@"preview-left"] && [preview isEqualToString:@""] ){
                                         [preview appendString:attPath];
                                         [preview appendString:file];
@@ -719,12 +725,11 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 
                         }
                         
+                        //NSLog(@"flags: %@", flags);
                         //NSLog(@"attachment: %@", attachment);
                         //NSLog(@"preview: %@", preview);
                         if (([attachment isEqualToString:@""] == NO) && ([preview isEqualToString:@""] == NO)) { //We have the attachment                             
                             //copy to temp
-                            
-
                             
                             NSString *writableDBPath =  [myAppPath stringByAppendingString:@"tmp/"];
                             NSMutableString *newpreviewPath = [NSMutableString new];
@@ -753,7 +758,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
                             if ( [[attachment pathExtension] isEqualToString:@"jpg"]) {
                                 content_type = @"image/jpeg";
                             }
-                            
+
                             hexdata = @"(null)";
                             content_loc = [attachment lastPathComponent] ;
                             
@@ -1047,7 +1052,7 @@ static void readF(sqlite3_context *context, int argc, sqlite3_value **argv) { re
 	[outdata appendString:@"{\"messages\" :[ {\"foo\": \"bar\"}"];
 	
 	if(sqlite3_open([@"/private/var/mobile/Library/SMS/sms.db" UTF8String], &database) == SQLITE_OK) {
-		const char *sqlStatement2 = "SELECT Max(rowid) as rowid, g as group_id, Max(naddress) as address, text, flags FROM (select Max(message .rowid) as rowid, Max(group_id) as g,  CASE WHEN address is Null THEN madrid_handle ELSE address  end as naddress, text, CASE WHEN flags = 3 OR madrid_flags = 12289 THEN 'toMe' ELSE 'fromMe' END as flags from message Group by CASE WHEN address is Null THEN madrid_handle ELSE address  end ) tmp  where group_id <> 0 GROUP BY g ORDER BY rowID DESC";
+		const char *sqlStatement2 = "SELECT Max(rowid) as rowid, g as group_id, Max(naddress) as address, text, flags FROM (select Max(message .rowid) as rowid, Max(group_id) as g,  CASE WHEN address is Null THEN madrid_handle ELSE address  end as naddress, text, CASE WHEN flags = 3 OR madrid_flags = 12289 OR madrid_flags = 4097 THEN 'toMe' ELSE 'fromMe' END as flags from message Group by CASE WHEN address is Null THEN madrid_handle ELSE address  end ) tmp  where group_id <> 0 GROUP BY g ORDER BY rowID DESC";
 
 		sqlite3_stmt *compiledStatement;
 		if(sqlite3_prepare_v2(database, sqlStatement2, -1, &compiledStatement, NULL) == SQLITE_OK) {
