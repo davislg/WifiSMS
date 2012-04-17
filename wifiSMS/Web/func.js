@@ -5,12 +5,14 @@ $(document).ready(function() {
       e.preventDefault();
   });
 
+  /*
 	if ( $.browser.msie ) {
 		if ( !(confirm("Your browser sucks, and I'm not supporting it. Click yes to accept it sucks and continue anyway.")) ) {
 			return;
 		}
 	}
-	
+	*/
+
 	loadSettings();
 	
 	$("#Contact img:first").click(function() {
@@ -46,46 +48,46 @@ $(document).ready(function() {
 				
 	});
 	
-//	$('div.btnDelete').live("click", function(event) {
-//		
-//		event.stopPropagation();
-//		if ( confirm("Are you sure you want to delete this conversation? There is no undo.") ) {
-//				var pa = $(this).parent()
-//				var grp = $(pa).attr("data-groupid");
-//				$.ajaxSetup({'beforeSend': function(xhr){
-//						if (xhr.overrideMimeType)
-//							xhr.overrideMimeType("text/plain");
-//						}
-//				});
-//				
-//				$.ajax({
-//					   type: "POST",
-//					   contentType: "text",
-//					   url: "/ajax/",
-//					   data: "action=deleteSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46&grp=" + grp, 
-//					   error:function (){
-//						   offline();
-//						   return;
-//					   },
-//					   success: function(resp){
-//					   	if (resp == "Deleted" ) {
-//								$(pa).remove();
-//								$("#grp").val("");
-//							  $('#ContactList li:first').trigger("click");
-//					   	} else {
-//					   		alert("Error deleting conversation");
-//					   	}
-//						 }
-//				});	
-//		}
-//	});
-//		
-//		
-//	$('#ContactList li').live("mouseenter", function() {
-//		$(this).find("div.btnDelete").delay(500).fadeIn();
-//	}).live("mouseleave", function() {
-//		$(this).find("div.btnDelete").stop().hide();
-//	});
+	$('div.btnDelete').live("click", function(event) {
+		
+		event.stopPropagation();
+		if ( confirm("Are you sure you want to delete this conversation? There is no undo.") ) {
+				var pa = $(this).parent()
+				var grp = $(pa).attr("data-groupid");
+				$.ajaxSetup({'beforeSend': function(xhr){
+						if (xhr.overrideMimeType)
+							xhr.overrideMimeType("text/plain");
+						}
+				});
+				
+				$.ajax({
+					   type: "POST",
+					   contentType: "text",
+					   url: "/ajax/",
+					   data: "action=deleteSMS&key=a4a1dda1-166d-47b0-8f31-a8581466da46&grp=" + grp, 
+					   error:function (){
+						   offline();
+						   return;
+					   },
+					   success: function(resp){
+					   	if (resp == "Deleted" ) {
+								$(pa).remove();
+								$("#grp").val("");
+							  $('#ContactList li:first').trigger("click");
+					   	} else {
+					   		alert("Error deleting conversation");
+					   	}
+						 }
+				});	
+		}
+	});
+		
+		
+	$('#ContactList li').live("mouseenter", function() {
+		$(this).find("div.btnDelete").delay(500).fadeIn();
+	}).live("mouseleave", function() {
+		$(this).find("div.btnDelete").stop().hide();
+	});
 			
 		
 	$('#ContactList li').live('click', function() {
